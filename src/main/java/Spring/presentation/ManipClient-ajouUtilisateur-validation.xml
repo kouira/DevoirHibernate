@@ -1,0 +1,62 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<field name="prenom">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+	<field name="nom">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+	<field name="adresse">
+		<field-validator type="requiredstring">
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+	<field name="pwd">
+		<field-validator type="requiredstring">
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+	<field name="login">
+		<field-validator type="requiredstring">
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+	<field name="login">
+		<field-validator type="requiredstring">
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+	<field name="selectedProfil">
+		<field-validator type="requiredstring">
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+	<field name="tel">
+		<field-validator type="requiredstring">
+			<message>
+				champ est obligatoire
+			</message>
+		</field-validator>
+	</field>
+</validators>

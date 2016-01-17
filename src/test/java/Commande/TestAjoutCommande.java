@@ -1,13 +1,13 @@
 package Commande;
 import junit.framework.TestCase;
-import model.Commande;
 
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 
-import dao.CommandeImpDao;
-import dao.ICommandeDao;
+import Spring.dao.CommandeImpDao;
+import Spring.dao.ICommandeDao;
+import Spring.model.Commande;
 
 public class TestAjoutCommande extends TestCase {
 

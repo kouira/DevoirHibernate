@@ -12,11 +12,6 @@
 
 <s:form id="ajoutCommande" action="AjoutCommande" >
  
- l'article choisi : <s:select 
-		headerKey="-1"
-		list="searchEngine" 
-		name="yourSearchEngine" 
-		value="defaultSearchEngine" />
  
 libelle : <s:property name="nom" id="libelle" />
 

@@ -3,10 +3,17 @@
   <display-name>PFASQLi</display-name>
  
  <welcome-file-list>
- <welcome-file> Client/AjoutCommande.jsp</welcome-file>
- 
+ <welcome-file> Admin/AjoutUser.jsp</welcome-file>
  </welcome-file-list>
  
+  <!-- Declare Spring configuration file location -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+           Spring.configuration
+        </param-value>
+    </context-param>
+    
   <filter>
      <filter-name>struts2</filter-name>
      <filter-class> org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
