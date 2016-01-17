@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import Spring.model.Utilisateur;
 import Spring.persistence.AbstractDao;
-import Spring.persistence.BaseDAO;
 
 @Repository
 public class UtilisateurImpDao extends AbstractDao implements IUtilisateurDao {
