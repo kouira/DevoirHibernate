@@ -32,7 +32,6 @@
 					<td><s:url id="deleteURL" action="deleteUtilisateur">
 							<s:param name="idUtilisateur" value="idUtilisateur"></s:param>
 						</s:url> <s:a href="%{deleteURL}">Delete</s:a></td>
-
 				</tr>
 			</s:iterator>
 		</table>

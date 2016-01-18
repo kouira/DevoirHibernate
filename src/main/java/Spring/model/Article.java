@@ -1,12 +1,14 @@
 package Spring.model;
 
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,9 +31,8 @@ public class Article {
 	@Column
 	private Long qte;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "article_commande", referencedColumnName = "idC")
-	private Commande commande;
+	@OneToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+	private Collection<Commande> commandes;
 	
 	public Long getIdArticle() {
 		return idArticle;
@@ -69,13 +70,6 @@ public class Article {
 		super();
 	}
 
-	public Commande getCommande() {
-		return commande;
-	}
-
-	public void setCommande(Commande commande) {
-		this.commande = commande;
-	}
 
 	public Long getQte() {
 		return qte;
@@ -83,6 +77,14 @@ public class Article {
 
 	public void setQte(Long qte) {
 		this.qte = qte;
+	}
+
+	public Collection<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(Collection<Commande> commandes) {
+		this.commandes = commandes;
 	}
 	
 }

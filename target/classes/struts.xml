@@ -8,10 +8,25 @@
 	<constant name="struts.devMode" value="false" />
 	<package name="Default" namespace="/" extends="struts-default">
 
-		<default-action-ref name="default" />
-
+		<default-action-ref name="listMesCommandes" />
+		
 		<action name="default" class="Spring.presentation.ManipClient" method="display">
-			<result name="success">/Admin/AjouterUtilisateur.jsp</result>
+			<result>Admin/AjouterUtilisateur.jsp</result>
+		</action>
+		
+
+		<action name="listArticleCommande" class="Spring.presentation.ManipCommande" method="list">
+			<result name="success">/Client/ListArticle.jsp</result>
+		</action>
+		
+		<action name="listMesCommandes" class="Spring.presentation.ManipCommande"
+			method="listCommande">
+			<result name="success"> /Client/ListerCommande.jsp</result>
+		</action>
+
+		<action name="listArticle" class="Spring.presentation.ManipCommande"
+			method="list">
+			<result name="success"> /Admin/Commander.jsp</result>
 		</action>
 
 		<action name="listUtilisateur" class="Spring.presentation.ManipClient"
@@ -52,17 +67,14 @@
 		</action>
 		
 
-
-		<action name="ajoutCommande" class="Spring.presentation.AjoutCommande">
-			<result name="success">securise/Liste_commande.jsp</result>
-			<result name="error">securise/ajout_commande.jsp</result>
+		<action name="commander" class="Spring.presentation.ManipCommande" method="commander">
+			<result type="redirectAction">
+			<param name="actionName">listArticleCommande</param>
+			<param name="namespace"> /Client </param> 
+			  </result>
 		</action>
 
 
-		<action name="register" class="Spring.presentation.AjoutClient">
-			<result name="success">securise/page_registration.jsp</result>
-			<result name="error">securise/page_registration.jsp</result>
-		</action>
 
 
 		

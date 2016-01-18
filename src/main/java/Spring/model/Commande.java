@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 
 @Entity
 @Table(name="commande")
@@ -22,15 +24,10 @@ public class Commande {
 	private Long idC;
 	
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	private Client client;
 	
-	
-	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-	@JoinColumn(
-	name = "commande_articleID",
-	referencedColumnName = "idArticle"
-	)
+	@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	private Article article;
 	
 	public Long getIdC() {

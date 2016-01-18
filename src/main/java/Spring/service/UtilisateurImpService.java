@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import Spring.dao.IUtilisateurDao;
+import Spring.model.Client;
 import Spring.model.Utilisateur;
 
 @Transactional
@@ -26,9 +27,9 @@ public class UtilisateurImpService implements IUtilisateurService {
 		dao.modifier(U);
 	}
 
-	public void supprimer(Long idUtilisateur) {
+	public void supprimer(Utilisateur Utilisateur) {
 		// TODO Auto-generated method stub
-		dao.supprimer(idUtilisateur);
+		dao.supprimer(Utilisateur);
 	}
 
 	public List<Utilisateur> listeUtilisateur() {
@@ -48,5 +49,9 @@ public class UtilisateurImpService implements IUtilisateurService {
 		// TODO Auto-generated method stub
 		return dao.getUtilisateur(id);
 	}
+
+	public Client getClient(Long id) {
+		return dao.getClient(id);
+		}
 
 }

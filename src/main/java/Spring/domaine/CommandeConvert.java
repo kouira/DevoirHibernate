@@ -14,6 +14,15 @@ public class CommandeConvert {
 
 		return com;
 	}
+	
+	public static CommandeBean createModelBean(Commande commande){
+		CommandeBean com = new CommandeBean();
+		
+		com.setClient(commande.getClient());
+		com.setArticle(commande.getArticle());
+
+		return com;
+	}
 
 	
 	public static List<CommandeBean> createCommandeBeanList(List<Commande> commds){

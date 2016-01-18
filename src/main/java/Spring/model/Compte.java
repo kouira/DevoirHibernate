@@ -23,7 +23,7 @@ public class Compte implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private int idCompt;
+	private Long idCompt;
 
 	@Column(name = "LOGIN", nullable = true)
 	private String login;
@@ -39,13 +39,18 @@ public class Compte implements Serializable {
 		super();
 	}
 
-	public int getIdCompt() {
+	
+	public Long getIdCompt() {
 		return idCompt;
 	}
 
-	public void setIdCompt(int idCompt) {
+
+
+	public void setIdCompt(Long idCompt) {
 		this.idCompt = idCompt;
 	}
+
+
 
 	public String getLogin() {
 		return login;

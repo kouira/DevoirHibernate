@@ -17,6 +17,7 @@ public class UtilisateurConvert {
 		
 		C.setLogin(UtiliBean.getCompte().getLogin());
 		C.setPwd(UtiliBean.getCompte().getPwd());
+		C.setIdCompt(UtiliBean.getCompte().getId());
 	
 		
 		Utilisateur U = new Utilisateur();

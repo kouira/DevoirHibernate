@@ -2,25 +2,19 @@ package Spring.model;
 
 import java.util.Collection;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "client")
-@PrimaryKeyJoinColumn(name = "idUtilisateur")
-public class Client extends Utilisateur{
+@DiscriminatorValue(value = "Client")
+public class Client extends Utilisateur {
 
-
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	private Collection<Commande> cmds;
-
-	
 
 	public Client() {
 		super();
@@ -33,6 +27,5 @@ public class Client extends Utilisateur{
 	public void setCmds(Collection<Commande> cmds) {
 		this.cmds = cmds;
 	}
-	
-	
+
 }

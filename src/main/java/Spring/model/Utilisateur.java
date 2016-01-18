@@ -2,7 +2,10 @@ package Spring.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -15,7 +18,11 @@ import Enumeration.Profil;
 
 @Entity
 @Table(name = "utilisateur")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+	    name="discriminator",
+	    discriminatorType=DiscriminatorType.STRING
+	    )
 public class Utilisateur {
 
 	@Id
@@ -34,7 +41,7 @@ public class Utilisateur {
 	@Column
 	private String adresse;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "compte_utilisateur", referencedColumnName = "idCompt")
 	private Compte compte;
 

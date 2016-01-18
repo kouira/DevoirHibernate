@@ -36,10 +36,11 @@ public class CommandeImpDao extends AbstractDao implements ICommandeDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Commande> listeCommande(Long idClient) {
+	public List listeCommande(Long idClient) {
 		
-		String req="from Commande where Client="+idClient;
-		return null;
+		String req="from Commande where client="+idClient;
+		return getByObject(req);
+		
 		}
 
 }

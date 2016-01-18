@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import Enumeration.Profil;
 import Spring.domaine.UtilisateurBean;
 import Spring.domaine.UtilisateurConvert;
+import Spring.model.Admin;
+import Spring.model.Client;
+import Spring.model.Compte;
 import Spring.model.Utilisateur;
 import Spring.service.IUtilisateurService;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 public class ManipClient extends ActionSupport
 	{
@@ -33,7 +34,7 @@ public class ManipClient extends ActionSupport
 	private Profil SelectedProfil;
 	
 
-	static UtilisateurBean uBean = new UtilisateurBean();
+	static Utilisateur uBean = null;
 
 	private List<Profil> profils = new ArrayList<Profil>();
 
@@ -56,39 +57,52 @@ public class ManipClient extends ActionSupport
 
 	public String ajoutClient() {
 		
+		 if ( getSelectedProfil() == Profil.Admin)
+			 uBean = new Admin();
+		 else
+			 uBean =new Client();
+		 
 		uBean.setAdresse(getAdresse());
 		uBean.setNom(getNom());
 		uBean.setPrenom(getPrenom());
 		uBean.setTel(getTel());
-		uBean.setSelectedProfil(getSelectedProfil());
+		uBean.setProfil(getSelectedProfil());
 		
-		System.out.println("hana ...."+getLogin());
-		uBean.getCompte().setLogin(getLogin());
-		uBean.getCompte().setPwd(getPwd());
+		Compte c= new Compte();
+		c.setLogin(getLogin());
+		c.setPwd(getPwd());
+		c.setUtilisateur(uBean);
 		
-		
-		service.ajout(UtilisateurConvert.createModel(uBean));
+		uBean.setCompte(c);
+		 
+		service.ajout(uBean);
 
 		return SUCCESS;
 	}
 
 	public String delete() {
+		
 		HttpServletRequest request = (HttpServletRequest) ActionContext
 				.getContext().get(ServletActionContext.HTTP_REQUEST);
-		service.supprimer(Long.valueOf(request.getParameter("idUtilisateur")));
-		return "success";
+		uBean = service.getUtilisateur(Long.valueOf(request
+				.getParameter("idUtilisateur")));
+		
+		service.supprimer(uBean);
+		
+		
+		return SUCCESS;
 	}
 
 	public String edit() {
 		
 		HttpServletRequest request = (HttpServletRequest) ActionContext
 				.getContext().get(ServletActionContext.HTTP_REQUEST);
-		uBean = UtilisateurConvert.createModelBean(service.getUtilisateur(Long.valueOf(request
-				.getParameter("idUtilisateur"))));
+		uBean = service.getUtilisateur(Long.valueOf(request
+				.getParameter("idUtilisateur")));
+		
 		
 		profils.add(Profil.Admin);
 		profils.add(Profil.Client);
-		
 		
 		setNom(uBean.getNom());
 		setPrenom(uBean.getPrenom());
@@ -96,24 +110,21 @@ public class ManipClient extends ActionSupport
 		setTel(uBean.getTel());
 		setLogin(uBean.getCompte().getLogin());
 		setPwd(uBean.getCompte().getPwd());
-		setSelectedProfil(uBean.getSelectedProfil());
-		System.out.println(uBean.getNom());
-		
-		uBean = UtilisateurConvert.createModelBean(service.getUtilisateur(Long.valueOf(request
-				.getParameter("idUtilisateur"))));
+		setSelectedProfil(uBean.getProfil());
+	
 		
 		return SUCCESS;
 	}
 
 	public String EditerUtilisateurOK() {
-   
+		
 		uBean.setAdresse(getAdresse());
 		uBean.setNom(getNom());
 		uBean.setPrenom(getPrenom());
 		uBean.setTel(getTel());
-		uBean.setSelectedProfil(getSelectedProfil());
+		uBean.setProfil(getSelectedProfil());
 		
-		service.modifier(UtilisateurConvert.createModel(uBean));
+		service.modifier(uBean);
 		return SUCCESS;
 
 	}
@@ -126,19 +137,7 @@ public class ManipClient extends ActionSupport
 		this.userList = userList;
 	}
 
-	public UtilisateurBean getModel() {
-		// TODO Auto-generated method stub
-		return uBean;
-	}
-
-	public UtilisateurBean getuBean() {
-		return uBean;
-	}
-
-	public void setuBean(UtilisateurBean uBean) {
-		this.uBean = uBean;
-	}
-
+	
 	public IUtilisateurService getService() {
 		return service;
 	}
@@ -209,6 +208,14 @@ public class ManipClient extends ActionSupport
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public static Utilisateur getuBean() {
+		return uBean;
+	}
+
+	public static void setuBean(Utilisateur uBean) {
+		ManipClient.uBean = uBean;
 	}
 
 

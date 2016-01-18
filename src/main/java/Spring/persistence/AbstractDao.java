@@ -16,7 +16,8 @@ public abstract class AbstractDao {
 	}
 
 	public void persist(Object entity) {
-		getSession().save(entity);
+		
+		getSession().merge(entity);
 	}
 
 	public void update(Object entity) {
@@ -33,14 +34,12 @@ public abstract class AbstractDao {
 		return getSession().createQuery(request).list();
 	}
 
-	public Object getObject(Object obj, Long id) {
+	public Object getObject(Class obj, Long id) {
 
-		return getSession().load(obj.getClass(), id);
+		return getSession().load(obj, id);
 
 	}
 	
-	public Object getObjectById(String request) {
-		return getSession().createQuery(request);
-	}
+	
 
 }
